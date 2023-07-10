@@ -1,0 +1,69 @@
+@font-face {
+  font-family: ProFontWindows;
+  src: url(/ProFontWindows.ttf);
+}
+
+@font-face {
+  font-family: HUN;
+  src: url(/hun2.ttf);
+}
+
+:root {
+  background-color: rgb(35, 35, 35);
+  color: rgb(200, 200, 200);
+  font-family: ProFontWindows;
+  text-align: center;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font-family: HUN;
+  font-size: 3em;
+}
+
+.download {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
+}
+
+.download-btn {
+  font-family: HUN;
+  font-style: normal;
+  font-size: 2em;
+  color: inherit;
+  text-decoration: none;
+  background-color: rgba(12, 12, 12, 86);
+  border: 3px solid rgb(75, 75, 75);
+  border-radius: 10px;
+
+  width: 1.5em;
+  height: 1.5em;
+  text-align: center;
+  line-height: 1.6em;
+}
+
+.players {
+  display: grid;
+  flex-grow: 1;
+  grid-template-columns: 47vw 47vw;
+}
+
+.player {
+  width: 100%;
+  height: 35em;
+}
+
+.p1 {
+  background-color: blue;
+}
+
+.p2 {
+  background-color: red;
+}
