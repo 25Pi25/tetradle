@@ -23,7 +23,7 @@
 
 h1 {
   font-family: HUN;
-  font-size: 3em;
+  font-size: 3.5em;
 }
 
 .download {
@@ -39,7 +39,7 @@ h1 {
   font-size: 2em;
   color: inherit;
   text-decoration: none;
-  background-color: rgba(12, 12, 12, 86);
+  background-color: rgba(12, 12, 12, 0.8);
   border: 3px solid rgb(75, 75, 75);
   border-radius: 10px;
 
@@ -51,19 +51,14 @@ h1 {
 
 .players {
   display: grid;
+  justify-items: center;
   flex-grow: 1;
-  grid-template-columns: 47vw 47vw;
+  grid-template-columns: 45em 45em;
 }
 
-.player {
-  width: 100%;
-  height: 35em;
-}
-
-.p1 {
-  background-color: blue;
-}
-
-.p2 {
-  background-color: red;
+.submit {
+  margin: 0.5em;
+  padding: 0.3em;
+  font-family: ProFontWindows;
+  font-size: 3em;
 }
