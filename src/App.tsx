@@ -2,6 +2,9 @@ import './App.css';
 import Player from './components/Player';
 import { useEffect, useState } from 'react';
 import defaultCaps from './data/defaultcaps.json' assert {type: "json"};
+import firebaseConfig from './data/firebase.config.json' assert {type: "json"};
+import { initializeApp } from "firebase/app";
+import { getStorage, ref, getDownloadURL } from "firebase/storage"
 import Cookies from 'universal-cookie';
 import Modal from './components/Modal';
 const cookies = new Cookies();
@@ -16,7 +19,7 @@ export interface ReplayInfo {
   id: number
   player1: Player,
   player2: Player,
-  replay: unknown
+  data: unknown
 }
 export interface RankInfo {
   threshold: number,
@@ -32,15 +35,17 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const replayData = await fetch("http://localhost:5000/api/daily.json");
-        const capsData = await fetch("http://localhost:5000/api/caps.json");
-        if (!replayData) return;
-        const replayJson = await replayData.json() as ReplayInfo;
+        const app = initializeApp(firebaseConfig);
+        const storage = getStorage(app);
+        const capsData = await fetch(await getDownloadURL(ref(storage, "caps.json")));
+        const dailyData = await fetch(await getDownloadURL(ref(storage, "daily.json")));
+        if (!capsData || !dailyData) return;
         const capsJson = await capsData.json() as RankInfo[];
-        setReplayInfo(replayJson);
+        const dailyJson = await dailyData.json() as ReplayInfo;
+        setReplayInfo(dailyJson);
         setRankInfo(capsJson);
-        setReplayURL(URL.createObjectURL(new Blob([JSON.stringify(replayJson?.replay ?? {})], { type: 'application/json' })));
-        if (cookies.get("lastFinish") && cookies.get("lastFinish") === replayJson?.id.toString())
+        setReplayURL(URL.createObjectURL(new Blob([JSON.stringify(dailyJson?.data ?? {})], { type: 'application/json' })));
+        if (cookies.get("lastFinish") && cookies.get("lastFinish") === dailyJson?.id.toString())
           setFinished(true);
       } catch (error) {
         console.log(error)
@@ -49,27 +54,23 @@ function App() {
     void fetchData();
   }, []);
 
-  const disabled = finished || !replayInfo?.replay
+  const disabled = finished || !replayInfo
   return <div className={`main ${finished ? 'dark-page' : ''}`}>
     <h1>TETRADLE{replayInfo?.id && ` #${replayInfo.id}`}</h1>
     {finished && replayInfo && <Modal replayInfo={replayInfo} />}
     {replayURL && (
       <div className='download'>
-        <h2>Download Here: </h2>
+        <h2 className='download-text'>Download: </h2>
         <a className='download-btn' href={replayURL ?? "#"} download={"replay.ttrm"}>Ǿ</a>
       </div>
     )}
     <div className='players'>
       <Player player={1}
         rankInfo={rankInfo}
-        disabled={disabled}
-        finished={finished}
-        replayInfo={replayInfo} />
+        disabled={disabled} />
       <Player player={2}
         rankInfo={rankInfo}
-        disabled={disabled}
-        finished={finished}
-        replayInfo={replayInfo} />
+        disabled={disabled} />
     </div>
     <div>
       <button className='submit'

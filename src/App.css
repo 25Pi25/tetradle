@@ -26,6 +26,10 @@ h1 {
   font-size: 3.5em;
 }
 
+.download-text {
+  font-size: 3em;
+}
+
 .download {
   display: flex;
   align-items: center;
@@ -36,7 +40,7 @@ h1 {
 .download-btn {
   font-family: HUN;
   font-style: normal;
-  font-size: 2em;
+  font-size: 3em;
   color: inherit;
   text-decoration: none;
   background-color: rgba(12, 12, 12, 0.8);
