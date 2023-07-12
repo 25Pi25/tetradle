@@ -21,6 +21,12 @@
   align-items: center;
 }
 
+.main-title,
+.download-text {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
 h1 {
   font-family: HUN;
   font-size: 3.5em;
@@ -47,21 +53,37 @@ h1 {
   border: 3px solid rgb(75, 75, 75);
   border-radius: 10px;
 
-  width: 1.5em;
-  height: 1.5em;
+  width: 70px;
+  height: 70px;
   text-align: center;
   line-height: 1.6em;
 }
 
+.tetrio-btn {
+  font-size: 3em;
+  text-decoration: none;
+  background-color: rgba(27, 0, 94, 0.8);
+  border: 3px solid rgb(61, 41, 127);
+  border-radius: 10px;
+
+  width: 70px;
+  height: 70px;
+  line-height: 95px;
+}
+
+.tetrio-btn:hover {
+  cursor: pointer;
+}
+
 .players {
+  width: 100%;
   display: grid;
   justify-items: center;
   flex-grow: 1;
-  grid-template-columns: 45em 45em;
+  grid-template-columns: 50% 50%;
 }
 
 .submit {
-  margin: 0.5em;
   padding: 0.3em;
   font-family: ProFontWindows;
   font-size: 3em;

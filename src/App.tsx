@@ -56,12 +56,13 @@ function App() {
 
   const disabled = finished || !replayInfo
   return <div className={`main ${finished ? 'dark-page' : ''}`}>
-    <h1>TETRADLE{replayInfo?.id && ` #${replayInfo.id}`}</h1>
+    <h1 className='main-title'>TETRADLE{replayInfo?.id && ` #${replayInfo.id}`}</h1>
     {finished && replayInfo && <Modal replayInfo={replayInfo} />}
     {replayURL && (
       <div className='download'>
         <h2 className='download-text'>Download: </h2>
         <a className='download-btn' href={replayURL ?? "#"} download={"replay.ttrm"}>Ǿ</a>
+        <a className='tetrio-btn' onClick={() => window.open("https://tetr.io", "_blank")}><img src="/tetrio.png" alt="TETR.IO" width="50" height="50" /></a>
       </div>
     )}
     <div className='players'>
@@ -72,6 +73,7 @@ function App() {
         rankInfo={rankInfo}
         disabled={disabled} />
     </div>
+    <h2>All replays are trimmed to FT3, and stats/players are anonymous! </h2>
     <div>
       <button className='submit'
         disabled={disabled}
