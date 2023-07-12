@@ -8,6 +8,8 @@ import { getStorage, ref, getDownloadURL } from "firebase/storage"
 import Cookies from 'universal-cookie';
 import Modal from './components/Modal';
 const cookies = new Cookies();
+const app = initializeApp(firebaseConfig);
+const storage = getStorage(app);
 
 interface Player {
   id: string,
@@ -18,8 +20,7 @@ interface Player {
 export interface ReplayInfo {
   id: number
   player1: Player,
-  player2: Player,
-  data: unknown
+  player2: Player
 }
 export interface RankInfo {
   threshold: number,
@@ -35,16 +36,14 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const app = initializeApp(firebaseConfig);
-        const storage = getStorage(app);
         const capsData = await fetch(await getDownloadURL(ref(storage, "caps.json")));
-        const dailyData = await fetch(await getDownloadURL(ref(storage, "daily.json")));
+        const dailyData = await fetch(await getDownloadURL(ref(storage, "answers.json")));
         if (!capsData || !dailyData) return;
         const capsJson = await capsData.json() as RankInfo[];
         const dailyJson = await dailyData.json() as ReplayInfo;
         setReplayInfo(dailyJson);
         setRankInfo(capsJson);
-        setReplayURL(URL.createObjectURL(new Blob([JSON.stringify(dailyJson?.data ?? {})], { type: 'application/json' })));
+        setReplayURL(await getDownloadURL(ref(storage, "replay.ttrm")));
         if (cookies.get("lastFinish") && cookies.get("lastFinish") === dailyJson?.id.toString())
           setFinished(true);
       } catch (error) {

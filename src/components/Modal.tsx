@@ -28,7 +28,7 @@ export default function Modal({ replayInfo: { player1, player2, id } }: { replay
                         <h2>Player: <a
                             href={`https://ch.tetr.io/u/${player1.id}`}
                             target="_blank"
-                            className='hide-link'
+                            className='username'
                         >{player1.username}</a>
                         </h2>
                         <h2>Rank: {player2.rank.toUpperCase()}</h2>
@@ -41,7 +41,7 @@ export default function Modal({ replayInfo: { player1, player2, id } }: { replay
                         <h2>Player: <a
                             href={`https://ch.tetr.io/u/${player2.id}`}
                             target="_blank"
-                            className='hide-link'
+                            className='username'
                         >{player2.username}</a>
                         </h2>
                         <h2>Rank: {player2.rank.toUpperCase()}</h2>
