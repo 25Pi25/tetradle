@@ -1,0 +1,15 @@
+.example {
+    border: 2px solid black;
+}
+
+.close-help {
+    position: fixed;
+    right: 2%;
+    top: 2%;
+    margin: 0;
+
+    font-size: 3em;
+    color: rgb(98, 98, 98);
+
+    cursor: pointer;
+}

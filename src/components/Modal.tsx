@@ -58,7 +58,9 @@ export default function Modal({ replayInfo: { player1, player2, id } }: { replay
                 ><img src="/twitter.png" alt="Twitter" width="75" height="75" /></a>
 
                 <img className="copy-button button" src="/share.png" alt="Share" width="75" height="75" onClick={() => {
-                    navigator.clipboard.writeText(shareText).catch(() => console.log("error"))
+                    navigator.clipboard.writeText(shareText)
+                    .then(() => alert("copied!"))
+                    .catch(() => console.log("error"))
                 }} />
             </div>
         </div>

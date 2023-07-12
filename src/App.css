@@ -71,6 +71,26 @@ h1 {
   line-height: 95px;
 }
 
+.help-btn {
+  font-family: HUN;
+  font-style: normal;
+  font-size: 3em;
+  background-color: rgba(107, 107, 107, 0.6);
+  border: 3px solid rgb(170, 170, 170);
+  border-radius: 10px;
+
+  position: fixed;
+  right: 1%;
+  top: 1%;
+  margin: 0px;
+  width: 70px;
+  height: 70px;
+  text-align: center;
+  line-height: 1.6em;
+
+  cursor: pointer;
+}
+
 .tetrio-btn:hover {
   cursor: pointer;
 }
@@ -87,4 +107,6 @@ h1 {
   padding: 0.3em;
   font-family: ProFontWindows;
   font-size: 3em;
+
+  cursor: pointer;
 }

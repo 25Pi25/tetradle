@@ -7,6 +7,7 @@ import { initializeApp } from "firebase/app";
 import { getStorage, ref, getDownloadURL } from "firebase/storage"
 import Cookies from 'universal-cookie';
 import Modal from './components/Modal';
+import Help from './components/Help';
 const cookies = new Cookies();
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
@@ -31,6 +32,7 @@ function App() {
   const [replayURL, setReplayURL] = useState<string>();
   const [replayInfo, setReplayInfo] = useState<ReplayInfo>();
   const [finished, setFinished] = useState<boolean>(false);
+  const [showHelp, setShowHelp] = useState<boolean>(false);
   const [rankInfo, setRankInfo] = useState<RankInfo[]>(defaultCaps);
 
   useEffect(() => {
@@ -55,13 +57,17 @@ function App() {
 
   const disabled = finished || !replayInfo
   return <div className={`main ${finished ? 'dark-page' : ''}`}>
+    <h1 className='help-btn' onClick={() => !finished && setShowHelp(lastState => !lastState)}>?</h1>
     <h1 className='main-title'>TETRADLE{replayInfo?.id && ` #${replayInfo.id}`}</h1>
     {finished && replayInfo && <Modal replayInfo={replayInfo} />}
+    {showHelp && <Help setShowHelp={setShowHelp}/>}
     {replayURL && (
       <div className='download'>
         <h2 className='download-text'>Download: </h2>
         <a className='download-btn' href={replayURL ?? "#"} download={"replay.ttrm"}>Ǿ</a>
-        <a className='tetrio-btn' onClick={() => window.open("https://tetr.io", "_blank")}><img src="/tetrio.png" alt="TETR.IO" width="50" height="50" /></a>
+        <a className='tetrio-btn' onClick={() => window.open("https://tetr.io", "_blank")}>
+          <img src="/tetrio.png" alt="TETR.IO" width="50" height="50" />
+        </a>
       </div>
     )}
     <div className='players'>
