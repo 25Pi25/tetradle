@@ -41,7 +41,7 @@ export default function Player({ player, rankInfo, disabled }: Props) {
                 id={`${playerName}-slider`}
                 className='slider'
                 value={rating}
-                onChange={event => setRating(Math.min(Math.max(parseInt(event.target.value), 0), 25000))} />
+                onChange={event => setRating(Math.min(Math.max(parseInt(event.target.value), 0), 25000) || 0)} />
             <input type="number"
                 disabled={disabled}
                 className='number-change'
@@ -49,7 +49,7 @@ export default function Player({ player, rankInfo, disabled }: Props) {
                 max="25000"
                 step="1"
                 value={rating}
-                onChange={event => setRating(Math.min(Math.max(parseInt(event.target.value), 0), 25000))} />
+                onChange={event => setRating(Math.min(Math.max(parseInt(event.target.value), 0), 25000) || 0)} />
         </div>
     </div>
 }
