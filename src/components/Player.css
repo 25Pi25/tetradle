@@ -27,10 +27,6 @@
     width: 85%;
 }
 
-.slider::-webkit-slider-thumb {
-    background-color: red;
-}
-
 .slider::-webkit-slider-runnable-track {
     border-radius: 12px;
     background: linear-gradient(to right,
