@@ -10,8 +10,8 @@ export default function Modal({ replayInfo: { player1, player2, id } }: { replay
     const rating1 = cookies.get("player1") as number || 0;
     const rating2 = cookies.get("player2") as number || 0;
 
-    const ratingDifference1 = player1.rating - rating1;
-    const ratingDifference2 = player2.rating - rating2;
+    const ratingDifference1 = rating1 - player1.rating;
+    const ratingDifference2 = rating2 - player2.rating;
 
     const emoji1 = Math.abs(ratingDifference1) < getMinimumCorrectRating(player1.rating) ? "🟩" :
         Math.abs(ratingDifference1) < getMinimumCorrectRating(player1.rating, 1.25) ? "🟨" : "🟥";
