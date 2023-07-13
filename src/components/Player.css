@@ -9,6 +9,12 @@
     justify-items: center;
 }
 
+.rating {
+    font-size: 1.5em;
+    font-weight: bold;
+    font-family: HUN;
+}
+
 .p1 {
     background-color: rgba(0, 0, 255, 0.2);
 }
@@ -47,12 +53,4 @@
             rgba(255, 170, 50, 0.6) 89%,
             rgba(255, 30, 20, 0.6) 95%,
             rgba(255, 85, 255, 0.6) 100%);
-}
-
-.wrong {
-    color: rgb(255, 60, 60);
-}
-
-.right {
-    color: rgb(60, 255, 60);
 }

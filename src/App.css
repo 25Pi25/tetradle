@@ -12,6 +12,7 @@
   background-color: rgb(35, 35, 35);
   color: rgb(200, 200, 200);
   font-family: ProFontWindows;
+  font-size: 1.75em;
   text-align: center;
 }
 
@@ -28,13 +29,7 @@
   margin-bottom: 0.5em;
 }
 
-h1 {
-  font-family: HUN;
-  font-size: 3.5em;
-}
-
 .download {
-  font-size: 2em;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -44,39 +39,44 @@ h1 {
 .download-btn {
   font-family: HUN;
   font-style: normal;
-  font-size: 2.5rem;
+  font-size: 1.6em;
   color: inherit;
   text-decoration: none;
   background-color: rgba(12, 12, 12, 0.8);
   border: 3px solid rgb(75, 75, 75);
   border-radius: 10px;
 
-  width: 1.5em;
-  height: 1.5em;
+  width: 1.3em;
+  height: 1.3em;
   text-align: center;
-  line-height: 1.6em;
+  line-height: 1.5em;
 }
 
 .tetrio-btn {
-  font-size: 2.5rem;
+  font-size: 1.6em;
   text-decoration: none;
   background-color: rgba(27, 0, 94, 0.8);
   border: 3px solid rgb(61, 41, 127);
   border-radius: 10px;
 
-  width: 1.5em;
-  height: 1.5em;
-  line-height: 2em;
+  width: 1.3em;
+  height: 1.3em;
+  line-height: 1.7em;
 }
 
 .tetrio-btn:hover {
   cursor: pointer;
 }
 
+.tetrio-img {
+  width: 40px;
+  height: 40px;
+}
+
 .help-btn {
   font-family: HUN;
   font-style: normal;
-  font-size: 2.5rem;
+  font-size: 2rem;
   background-color: rgba(107, 107, 107, 0.6);
   border: 3px solid rgb(170, 170, 170);
   border-radius: 10px;
@@ -105,7 +105,7 @@ h1 {
 .submit {
   padding: 0.3em;
   font-family: ProFontWindows;
-  font-size: 3em;
+  font-size: 1.5em;
 
   cursor: pointer;
 }
@@ -115,11 +115,24 @@ h1 {
   z-index: 1;
 }
 
+h1 {
+  font-family: HUN;
+}
+
 @media (max-width: 480px) {
   h1 {
-    font-size: 2.5em;
+    font-size: 2em;
   }
+
   .download {
-    font-size: 1.5em;
+    font-size: 0.75em;
+  }
+
+  .help-btn {
+    font-size: 0.75em;
+  }
+  .tetrio-img {
+    width: 30px;
+    height: 30px;
   }
 }

@@ -31,7 +31,7 @@ export default function Player({ player, rankInfo, disabled }: Props) {
             <img src={nextRank.url}
                 alt="rank" width="30" height="30" />
         </div>
-        <h1>{rating} TR</h1>
+        <p className='rating'>{rating} TR</p>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
             <input type="range"
                 disabled={disabled}

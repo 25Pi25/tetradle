@@ -4,7 +4,7 @@ const cookies = new Cookies();
 import './Modal.css';
 
 //calculated in python because i could not be bothered
-const getMinimumCorrectRating = (tr: number) => 1.5 * (-0.000008707 * Math.pow(tr, 2) + 0.178725036 * tr + 976.46);
+const getMinimumCorrectRating = (tr: number, mult = 1) => 1.5 * mult * (-0.000008707 * Math.pow(tr, 2) + 0.178725036 * tr + 976.46);
 
 export default function Modal({ replayInfo: { player1, player2, id } }: { replayInfo: ReplayInfo }) {
     const rating1 = cookies.get("player1") as number || 0;
@@ -13,8 +13,10 @@ export default function Modal({ replayInfo: { player1, player2, id } }: { replay
     const ratingDifference1 = rating1 - player1.rating
     const ratingDifference2 = rating2 - player2.rating
 
-    const emoji1 = Math.abs(ratingDifference1) < getMinimumCorrectRating(player1.rating) ? "🟩" : "🟥";
-    const emoji2 = Math.abs(ratingDifference2) < getMinimumCorrectRating(player2.rating) ? "🟩" : "🟥";
+    const emoji1 = Math.abs(ratingDifference1) < getMinimumCorrectRating(player1.rating) ? "🟩" :
+        Math.abs(ratingDifference1) < getMinimumCorrectRating(player1.rating, 1.25) ? "🟨" : "🟥";
+    const emoji2 = Math.abs(ratingDifference2) < getMinimumCorrectRating(player2.rating) ? "🟩" :
+        Math.abs(ratingDifference1) < getMinimumCorrectRating(player1.rating, 1.25) ? "🟨" : "🟥";
     const ratingAsString1 = ratingDifference1 < 0 ? ratingDifference1.toString() : `+${ratingDifference1}`;
     const ratingAsString2 = ratingDifference2 < 0 ? ratingDifference2.toString() : `+${ratingDifference2}`;
 
@@ -25,33 +27,34 @@ export default function Modal({ replayInfo: { player1, player2, id } }: { replay
             <div className='player-modals'>
                 <div className='player-modal p1'>
                     <div className='show'>
-                        <h2>Player: <a
+                        <p>Player: <a
                             href={`https://ch.tetr.io/u/${player1.id}`}
                             target="_blank"
                             className='username'
                         >{player1.username}</a>
-                        </h2>
-                        <h2>Rank: {player2.rank.toUpperCase()}</h2>
-                        <h2>Actual TR: {player1.rating} <strong className={emoji1 == "🟩" ? "right" : "wrong"}>({ratingAsString1})</strong></h2>
-                        <h2>Your Guess: {rating1}</h2>
+                        </p>
+                        <p>Rank: {player2.rank.toUpperCase()}</p>
+                        <p>Actual TR: {player1.rating} <strong className={emoji1}>({ratingAsString1})</strong></p>
+                        <p>Your Guess: {rating1}</p>
                     </div>
                 </div>
                 <div className='player-modal p2'>
                     <div className='show'>
-                        <h2>Player: <a
+                        <p>Player: <a
                             href={`https://ch.tetr.io/u/${player2.id}`}
                             target="_blank"
                             className='username'
                         >{player2.username}</a>
-                        </h2>
-                        <h2>Rank: {player2.rank.toUpperCase()}</h2>
-                        <h2>Actual TR: {player2.rating} <strong className={emoji2 == "🟩" ? "right" : "wrong"}>({ratingAsString2})</strong></h2>
-                        <h2>Your Guess: {rating2}</h2>
+                        </p>
+                        <p>Rank: {player2.rank.toUpperCase()}</p>
+                        <p>Actual TR: {player2.rating} <strong className={emoji2}>({ratingAsString2})</strong></p>
+                        <p>Your Guess: {rating2}</p>
                     </div>
                 </div>
             </div>
 
-
+            <p>Click a share button to show your results without spoilers!</p>
+            <strong className='promotion'>Post your TETR.IO username on twitter with Tetradle for a chance to win supporter!</strong>
             <div className='share-buttons'>
                 <a className="twitter-share-button button"
                     href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`}
@@ -59,8 +62,8 @@ export default function Modal({ replayInfo: { player1, player2, id } }: { replay
 
                 <img className="copy-button button" src="/share.png" alt="Share" width="75" height="75" onClick={() => {
                     navigator.clipboard.writeText(shareText)
-                    .then(() => alert("copied!"))
-                    .catch(() => console.log("error"))
+                        .then(() => alert("copied!"))
+                        .catch(() => console.log("error"))
                 }} />
             </div>
         </div>

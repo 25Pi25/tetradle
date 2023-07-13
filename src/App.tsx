@@ -66,7 +66,7 @@ function App() {
         <h2 className='download-text'>Download: </h2>
         <a className='download-btn' href={replayURL ?? "#"} download={"replay.ttrm"}>Ǿ</a>
         <a className='tetrio-btn' onClick={() => window.open("https://tetr.io", "_blank")}>
-          <img src="/tetrio.png" alt="TETR.IO" width="40" height="40" />
+          <img className='tetrio-img' src="/tetrio.png" alt="TETR.IO" />
         </a>
       </div>
     )}
@@ -78,7 +78,7 @@ function App() {
         rankInfo={rankInfo}
         disabled={disabled} />
     </div>
-    <h2>All replays are trimmed to FT3, and stats/players are anonymous! </h2>
+    <p>All replays are trimmed to FT3, and stats/players are anonymous! </p>
     <div>
       <button className='submit'
         disabled={disabled}
