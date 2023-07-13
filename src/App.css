@@ -76,7 +76,7 @@
 .help-btn {
   font-family: HUN;
   font-style: normal;
-  font-size: 2rem;
+  font-size: 1.75em;
   background-color: rgba(107, 107, 107, 0.6);
   border: 3px solid rgb(170, 170, 170);
   border-radius: 10px;
@@ -131,6 +131,7 @@ h1 {
   .help-btn {
     font-size: 0.75em;
   }
+
   .tetrio-img {
     width: 30px;
     height: 30px;
