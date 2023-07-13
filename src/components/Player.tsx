@@ -26,7 +26,7 @@ export default function Player({ player, rankInfo, disabled }: Props) {
         <div className='rank-progress'>
             <img src={prevRank.url}
                 alt="rank" width="30" height="30" />
-            <progress id="file" max="100"
+            <progress style={{ fontSize: "0.75em" }} max="100"
                 value={(rating - startRating) / (endRating - startRating) * 100} />
             <img src={nextRank.url}
                 alt="rank" width="30" height="30" />
