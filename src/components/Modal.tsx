@@ -54,7 +54,6 @@ export default function Modal({ replayInfo: { player1, player2, id } }: { replay
             </div>
 
             <p>Click a share button to show your results without spoilers!</p>
-            <strong className='promotion'>Post your TETR.IO username on twitter with Tetradle for a chance to win supporter!</strong>
             <div className='share-buttons'>
                 <a className="twitter-share-button button"
                     href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`}
