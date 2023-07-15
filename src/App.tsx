@@ -1,6 +1,6 @@
 import './App.css';
 import Player from './components/Player';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import defaultCaps from './data/defaultcaps.json' assert {type: "json"};
 import firebaseConfig from './data/firebase.config.json' assert {type: "json"};
 import { initializeApp } from "firebase/app";
@@ -34,6 +34,8 @@ function App() {
   const [finished, setFinished] = useState<boolean>(false);
   const [showHelp, setShowHelp] = useState<boolean>(false);
   const [rankInfo, setRankInfo] = useState<RankInfo[]>(defaultCaps);
+  const slider1Ref = useRef<HTMLInputElement>();
+  const slider2Ref = useRef<HTMLInputElement>();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -60,7 +62,7 @@ function App() {
     <h1 className='help-btn' onClick={() => !finished && setShowHelp(lastState => !lastState)}>?</h1>
     <h1 className='main-title'>TETRADLE{replayInfo?.id && ` #${replayInfo.id}`}</h1>
     {finished && replayInfo && <Modal replayInfo={replayInfo} />}
-    {showHelp && <Help setShowHelp={setShowHelp}/>}
+    {showHelp && <Help setShowHelp={setShowHelp} />}
     {replayURL && (
       <div className='download'>
         <h2 className='download-text'>Download: </h2>
@@ -73,10 +75,12 @@ function App() {
     <div className='players'>
       <Player player={1}
         rankInfo={rankInfo}
-        disabled={disabled} />
+        disabled={disabled}
+        sliderRef={slider1Ref} />
       <Player player={2}
         rankInfo={rankInfo}
-        disabled={disabled} />
+        disabled={disabled}
+        sliderRef={slider2Ref} />
     </div>
     <p>All replays are trimmed to FT3, and stats/players are anonymous! </p>
     <div>
@@ -84,8 +88,8 @@ function App() {
         disabled={disabled}
         onClick={() => {
           cookies.set("lastFinish", replayInfo?.id.toString())
-          cookies.set("player1", (document.getElementById("p1-slider") as HTMLInputElement)?.value ?? "")
-          cookies.set("player2", (document.getElementById("p2-slider") as HTMLInputElement)?.value ?? "")
+          cookies.set("player1", slider1Ref.current?.value ?? 0)
+          cookies.set("player2", slider2Ref.current?.value ?? 0)
           setFinished(true);
         }}>Submit</button>
     </div>

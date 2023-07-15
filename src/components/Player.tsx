@@ -1,16 +1,18 @@
-import { useState } from 'react';
+import { LegacyRef, MutableRefObject, useState } from 'react';
 import './Player.css';
 import { RankInfo } from '../App';
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 const getRankFromIndex = (index: number, rankInfo: RankInfo[]) => rankInfo[index] ?? rankInfo[0];
+
 interface Props {
     player: number,
     rankInfo: RankInfo[],
-    disabled: boolean
+    disabled: boolean,
+    sliderRef: MutableRefObject<HTMLInputElement | undefined>
 }
-export default function Player({ player, rankInfo, disabled }: Props) {
+export default function Player({ player, rankInfo, disabled, sliderRef }: Props) {
     const [rating, setRating] = useState(parseInt(cookies.get(`player${player}`) as string ?? "0"));
     const playerName = player == 1 ? 'p1' : 'p2';
 
@@ -44,6 +46,7 @@ export default function Player({ player, rankInfo, disabled }: Props) {
                 onChange={event => setRating(Math.min(Math.max(parseInt(event.target.value), 0), 25000) || 0)} />
             <input type="number"
                 disabled={disabled}
+                ref={sliderRef as LegacyRef<HTMLInputElement>}
                 className='number-change'
                 min="0"
                 max="25000"
