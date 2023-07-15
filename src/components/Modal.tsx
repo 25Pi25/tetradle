@@ -5,7 +5,12 @@ import './Modal.css';
 
 //calculated in python because i could not be bothered
 const getMinimumCorrectRating = (tr: number, mult = 1) => 1.5 * mult * (-0.000008707 * Math.pow(tr, 2) + 0.178725036 * tr + 976.46);
-
+const getCorrespondingEmoji = (ratingDifference: number, realRating: number) => {
+    if (ratingDifference == 0) return "🟦";
+    if (Math.abs(ratingDifference) < getMinimumCorrectRating(realRating)) return "🟩";
+    if (Math.abs(ratingDifference) < getMinimumCorrectRating(realRating, 1.25)) return "🟨";
+    return "🟥";
+}
 export default function Modal({ replayInfo: { player1, player2, id } }: { replayInfo: ReplayInfo }) {
     const rating1 = cookies.get("player1") as number || 0;
     const rating2 = cookies.get("player2") as number || 0;
@@ -13,10 +18,8 @@ export default function Modal({ replayInfo: { player1, player2, id } }: { replay
     const ratingDifference1 = rating1 - player1.rating;
     const ratingDifference2 = rating2 - player2.rating;
 
-    const emoji1 = Math.abs(ratingDifference1) < getMinimumCorrectRating(player1.rating) ? "🟩" :
-        Math.abs(ratingDifference1) < getMinimumCorrectRating(player1.rating, 1.25) ? "🟨" : "🟥";
-    const emoji2 = Math.abs(ratingDifference2) < getMinimumCorrectRating(player2.rating) ? "🟩" :
-        Math.abs(ratingDifference2) < getMinimumCorrectRating(player2.rating, 1.25) ? "🟨" : "🟥";
+    const emoji1 = getCorrespondingEmoji(ratingDifference1, player1.rating);
+    const emoji2 = getCorrespondingEmoji(ratingDifference2, player2.rating);
     const ratingAsString1 = ratingDifference1 < 0 ? ratingDifference1.toString() : `+${ratingDifference1}`;
     const ratingAsString2 = ratingDifference2 < 0 ? ratingDifference2.toString() : `+${ratingDifference2}`;
 
