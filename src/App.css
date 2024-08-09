@@ -8,12 +8,17 @@
   src: url(/hun2.ttf);
 }
 
+
 :root {
   background-color: rgb(35, 35, 35);
   color: rgb(200, 200, 200);
   font-family: ProFontWindows;
   font-size: 1.75em;
   text-align: center;
+}
+
+:root:has(.dark-page) {
+  background-color: black;
 }
 
 .main {
@@ -93,6 +98,10 @@
   cursor: pointer;
 }
 
+.help-btn:nth-child(2) {
+  top: 12%;
+}
+
 
 .players {
   width: 100%;
@@ -108,11 +117,6 @@
   font-size: 1.5em;
 
   cursor: pointer;
-}
-
-.dark-page {
-  background-color: rgba(0, 0, 0, 1);
-  z-index: 1;
 }
 
 h1 {

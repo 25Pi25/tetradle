@@ -8,11 +8,11 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "deploy": "tsc && vite build && firebase deploy",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
-    "better-sqlite3": "^8.4.0",
     "firebase": "^10.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

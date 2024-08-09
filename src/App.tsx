@@ -8,6 +8,7 @@ import { getStorage, ref, getDownloadURL } from "firebase/storage"
 import Cookies from 'universal-cookie';
 import Modal from './components/Modal';
 import Help from './components/Help';
+import Archive from './components/Archive';
 const cookies = new Cookies();
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
@@ -33,6 +34,7 @@ function App() {
   const [replayInfo, setReplayInfo] = useState<ReplayInfo>();
   const [finished, setFinished] = useState<boolean>(false);
   const [showHelp, setShowHelp] = useState<boolean>(false);
+  const [learnMore, setLearnMore] = useState<boolean>(false);
   const [rankInfo, setRankInfo] = useState<RankInfo[]>(defaultCaps);
   const slider1Ref = useRef<HTMLInputElement>();
   const slider2Ref = useRef<HTMLInputElement>();
@@ -48,21 +50,21 @@ function App() {
         setReplayInfo(dailyJson);
         setRankInfo(capsJson);
         setReplayURL(await getDownloadURL(ref(storage, "replay.ttrm")));
-        if (cookies.get("lastFinish") && cookies.get("lastFinish") === dailyJson?.id.toString())
-          setFinished(true);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     };
     void fetchData();
   }, []);
 
-  const disabled = finished || !replayInfo
+  const disabled = finished || !replayInfo;
   return <div className={`main ${finished || showHelp ? 'dark-page' : ''}`}>
     <h1 className='help-btn' onClick={() => !finished && setShowHelp(lastState => !lastState)}>?</h1>
+    <h1 className='help-btn bright' onClick={() => !finished && setLearnMore(lastState => !lastState)}>!!!</h1>
     <h1 className='main-title'>TETRADLE{replayInfo?.id && ` #${replayInfo.id}`}</h1>
     {finished && replayInfo && <Modal replayInfo={replayInfo} />}
     {showHelp && <Help setShowHelp={setShowHelp} />}
+    {learnMore && <Archive setLearnMore={setLearnMore} />}
     {replayURL && (
       <div className='download'>
         <h2 className='download-text'>Download: </h2>

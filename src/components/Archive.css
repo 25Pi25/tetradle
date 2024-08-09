@@ -1,0 +1,22 @@
+.example {
+    border: 2px solid black;
+    width: 60%;
+}
+
+.close-help {
+    position: fixed;
+    right: 2%;
+    top: 2%;
+    margin: 0;
+
+    font-size: 2em;
+    color: rgb(98, 98, 98);
+
+    cursor: pointer;
+}
+
+@media (max-width: 480px) {
+    .example {
+        width: 90%;
+    }
+}
